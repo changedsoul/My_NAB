@@ -37,6 +37,7 @@ jobs:
           Copy-Item "dist/My NAB Server.exe" "pkg/My NAB/"
           Copy-Item "dist/Open My NAB.exe" "pkg/My NAB/"
           Copy-Item "packaging/windows/READ ME FIRST.txt" "pkg/My NAB/"
+          Copy-Item "LICENSE" "pkg/My NAB/"
           Compress-Archive -Path "pkg/My NAB" -DestinationPath "My-NAB-windows.zip"
 
       - name: Package (Linux)
@@ -44,8 +45,8 @@ jobs:
         run: |
           mkdir -p pkg/My-NAB-linux
           cp dist/my-nab-server dist/open-my-nab pkg/My-NAB-linux/
-          cp packaging/linux/README-LINUX.txt packaging/linux/install-launchers.sh pkg/My-NAB-linux/
-          chmod +x pkg/My-NAB-linux/*
+          cp packaging/linux/README-LINUX.txt packaging/linux/install-launchers.sh LICENSE pkg/My-NAB-linux/
+          chmod +x pkg/My-NAB-linux/my-nab-server pkg/My-NAB-linux/open-my-nab pkg/My-NAB-linux/install-launchers.sh
           tar -czf My-NAB-linux.tar.gz -C pkg My-NAB-linux
 
       - name: Package (Mac)
@@ -54,6 +55,7 @@ jobs:
           mkdir -p "pkg/My NAB"
           cp -R "dist/My NAB Server.app" "dist/Open My NAB.app" "pkg/My NAB/"
           cp packaging/mac-README.txt "pkg/My NAB/READ ME FIRST.txt"
+          cp LICENSE "pkg/My NAB/"
           ditto -c -k --keepParent "pkg/My NAB" "My-NAB-${{ matrix.id }}.zip"
 
       - uses: actions/upload-artifact@v6

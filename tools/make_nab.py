@@ -17,7 +17,7 @@ OUT = os.path.join(DOCKER, "My_NAB")
 
 DIRS = ["api", "static"]
 FILES = ["app.py", "budget_engine.py", "db.py", "importers.py", "scheduled_engine.py", "secure.py",
-         "requirements.txt", "requirements-secure.txt", "Dockerfile", "docker-compose.yml", ".dockerignore", "deploy.sh"]
+         "requirements.txt", "requirements-secure.txt", "LICENSE", "Dockerfile", "docker-compose.yml", ".dockerignore", "deploy.sh"]
 
 DEPLOY_NOTES = """My_NAB: copy this whole folder to the NAS (e.g. /volume1/docker/My_NAB).
 
