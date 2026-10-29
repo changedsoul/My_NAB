@@ -11,6 +11,24 @@ your phone, one password, no subscription, no cloud.
 
 A made-up **Demo Budget** (password `demo1234`) is included so you can look around first.
 
+## Start here (new to GitHub?)
+
+You don't need to install anything or type any commands.
+
+1. Open the **[Releases page](https://github.com/changedsoul/My_NAB/releases)** and scroll to **Assets** under the newest release.
+2. Click the file for your computer to download it:
+   - **Windows:** `My-NAB-windows.zip`
+   - **Mac:** click the Apple menu, then **About This Mac**. If it says *Chip: Apple M1* (or M2, M3, M4), get `My-NAB-mac-apple-silicon.zip`. If it says *Processor: Intel*, get `My-NAB-mac-intel.zip`.
+   - **Linux:** `My-NAB-linux.tar.gz`
+3. **Unzip it first.** Right-click the zip and choose **Extract All** (Windows) or double-click it (Mac). Don't run the programs from inside the zip.
+4. Double-click **My NAB Server**. Nothing pops up. A small icon appears near the clock (Windows: click the little `^` if you don't see it) or in the menu bar (Mac). That means it's running.
+5. Double-click **Open My NAB**. Your web browser opens on the app.
+6. Click **Open** next to **Demo Budget** and type the password `demo1234`. It's made-up data, so click and change anything you like. When you're ready, click **+ New Budget**.
+
+Your computer may warn you the first time ("Windows protected your PC", or a Mac saying it can't be opened). That happens for any program not from a big publisher. The steps to get past it are just below.
+
+To stop it, right-click the icon and choose **Quit**. Closing the browser doesn't stop it. Your budgets are saved in a `data` folder next to the programs, so copy that folder to back them up.
+
 ## Run it on your computer
 
 **Windows / Mac / Linux: download the program**
@@ -51,3 +69,10 @@ Your budgets are saved in the `data` folder.
 
 Synology steps, HTTPS, phone install, importing bank files, backups and settings are in the
 **[full guide](docs/GUIDE.md)**.
+
+## License
+
+Copyright (C) 2026 changedsoul. My NAB is free software under the
+**[GNU Affero General Public License v3.0](LICENSE)**: you can use, study, share and change it. If you share a
+modified version, or run one as a service for other people, you must make your changes available under the same license.
+It comes with no warranty.
