@@ -1,0 +1,7 @@
+# Extra packages used to build the desktop programs (see .github/workflows/build-desktop.yml)
+-r requirements.txt
+waitress>=3.0
+pyinstaller>=6.0
+# The little icon near the clock (Windows) / in the menu bar (Mac). The Linux program has none.
+pystray>=0.19; sys_platform != "linux"
+pillow>=10.0; sys_platform != "linux"

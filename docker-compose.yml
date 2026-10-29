@@ -1,0 +1,34 @@
+services:
+  my-nab:
+    build: .
+    # Or, once you push an image somewhere: image: my-nab:latest
+    container_name: my-nab
+    restart: unless-stopped
+    ports:
+      # Host port 8080 -> container 8000, reachable only from the NAS itself
+      # (127.0.0.1): DSM's reverse proxy terminates HTTPS with your NAS
+      # certificate and forwards here, so plain HTTP is never exposed on the
+      # LAN. Change 8080 if it's taken (DSM itself often uses 5000/5001).
+      - "127.0.0.1:8080:8000"
+    environment:
+      # Optional: the app generates a secret key and stores it in the data
+      # folder, so sessions already survive restarts and updates. Only set this
+      # if you want to pin your own value.
+      # - NAB_SECRET_KEY=a-long-random-string
+      - NAB_DB_PATH=/data/nab.db
+      # An encrypted budget locks itself after this many minutes with no activity from any device.
+      # - NAB_LOCK_MINUTES=10
+      # Users browse over HTTPS (via the reverse proxy), so mark the login
+      # cookie Secure. Browsers need HTTPS for offline support on phones.
+      - NAB_HTTPS=1
+      # ALTERNATIVE (no reverse proxy): have gunicorn serve TLS itself with a
+      # cert + key you provide. Then also publish the port as "8080:8000"
+      # instead of the 127.0.0.1 form above, and uncomment the /certs volume.
+      # - GUNICORN_CMD_ARGS=--certfile=/certs/server.crt --keyfile=/certs/server.key
+    volumes:
+      # Your budget database. On Synology, point the left side at a real folder,
+      # e.g. /volume1/docker/My_NAB/data:/data
+      - ./data:/data
+      # Only for the direct-TLS alternative: full-chain cert + key named
+      # server.crt / server.key in a ./certs folder next to this file.
+      # - ./certs:/certs:ro

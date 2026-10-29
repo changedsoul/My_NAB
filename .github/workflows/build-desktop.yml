@@ -1,0 +1,81 @@
+name: Build desktop programs
+
+# Builds My NAB for Windows, Linux and Mac on GitHub's own machines.
+#   Manually: Actions tab -> "Build desktop programs" -> Run workflow -> download the zips under "Artifacts".
+#   For a release: push a tag like v1.0.0 and the downloads are attached to a GitHub Release.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { id: windows,           os: windows-latest }
+          - { id: linux,             os: ubuntu-22.04 }     # older glibc, so it runs on more Linux systems
+          - { id: mac-apple-silicon, os: macos-14 }         # M1/M2/M3/M4
+          - { id: mac-intel,         os: macos-15-intel }   # Intel Macs
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install build tools
+        run: python -m pip install -r requirements-build.txt
+      - name: Build the programs
+        run: pyinstaller --noconfirm packaging/my-nab.spec
+
+      - name: Package (Windows)
+        if: matrix.id == 'windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force "pkg/My NAB" | Out-Null
+          Copy-Item "dist/My NAB Server.exe" "pkg/My NAB/"
+          Copy-Item "dist/Open My NAB.exe" "pkg/My NAB/"
+          Copy-Item "packaging/windows/READ ME FIRST.txt" "pkg/My NAB/"
+          Compress-Archive -Path "pkg/My NAB" -DestinationPath "My-NAB-windows.zip"
+
+      - name: Package (Linux)
+        if: matrix.id == 'linux'
+        run: |
+          mkdir -p pkg/My-NAB-linux
+          cp dist/my-nab-server dist/open-my-nab pkg/My-NAB-linux/
+          cp packaging/linux/README-LINUX.txt packaging/linux/install-launchers.sh pkg/My-NAB-linux/
+          chmod +x pkg/My-NAB-linux/*
+          tar -czf My-NAB-linux.tar.gz -C pkg My-NAB-linux
+
+      - name: Package (Mac)
+        if: startsWith(matrix.id, 'mac-')
+        run: |
+          mkdir -p "pkg/My NAB"
+          cp -R "dist/My NAB Server.app" "dist/Open My NAB.app" "pkg/My NAB/"
+          cp packaging/mac-README.txt "pkg/My NAB/READ ME FIRST.txt"
+          ditto -c -k --keepParent "pkg/My NAB" "My-NAB-${{ matrix.id }}.zip"
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: My-NAB-${{ matrix.id }}
+          path: |
+            My-NAB-*.zip
+            My-NAB-*.tar.gz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          path: downloads
+          merge-multiple: true
+      - name: Attach everything to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release create "$GITHUB_REF_NAME" downloads/* --title "My NAB $GITHUB_REF_NAME" --generate-notes

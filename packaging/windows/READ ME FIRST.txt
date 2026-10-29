@@ -1,0 +1,45 @@
+My NAB - a private budgeting app that runs on your own computer
+================================================================
+
+My NAB has TWO programs in this folder. Here is what each one does:
+
+  My NAB Server   Starts My NAB in the background. It does not open anything on its own.
+                  A small icon appears near the clock to show it is running (click the
+                  little ^ arrow if you don't see it). It KEEPS RUNNING when you close your
+                  browser, until you right-click the icon and choose "Quit My NAB Server"
+                  (or you log off or shut down).
+
+  Open My NAB     Opens your web browser on My NAB. If the server isn't running yet, it
+                  offers to start it for you.
+
+TO GET STARTED
+  1. Double-click "My NAB Server". (Nothing opens; look for the icon near the clock.)
+  2. Double-click "Open My NAB". Your browser shows My NAB.
+  3. The first screen lists your budgets. A ready-made "Demo Budget" (made-up data) is
+     already there; its password is shown next to it:  demo1234
+     Click Open to look around - change anything you like, it's only the demo.
+  4. To start your own budget, click "+ New Budget", then "Set Up" and choose a password.
+  5. To go back to the list of budgets at any time, click "Close Budget" at the bottom of
+     the menu on the left.
+
+TO STOP IT
+  Right-click the My NAB Server icon near the clock and choose "Quit My NAB Server".
+  Closing the browser does not stop it.
+
+YOUR DATA
+  All your budgets are saved in the "data" folder right next to these programs. Back it up
+  by copying that folder. To update My NAB later, replace the two .exe files with the new
+  ones and keep your "data" folder. You can delete the Demo Budget (trash-can icon on the
+  budget list) whenever you like.
+
+IF WINDOWS SAYS "WINDOWS PROTECTED YOUR PC"
+  That message appears for any program that isn't from a big publisher. Click
+  "More info", then "Run anyway". (If you're unsure, only run it if you got it from
+  the official download page.)
+
+NOTES
+  * Everything stays on your computer. Nothing is sent anywhere, and it can't be reached
+    from other computers.
+  * Do not run these from inside the zip file. Right-click the zip, choose
+    "Extract All...", then open the extracted folder.
+  * If something goes wrong, look for a file called "My NAB.log" next to the programs.

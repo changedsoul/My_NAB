@@ -1,0 +1,15 @@
+# Try My NAB with the ready-made demo budget (made-up data; nothing of yours is touched).
+#
+#   docker compose -f docker-compose.demo.yml up -d --build
+#   then open http://localhost:8081   (password: demo1234)
+#   stop and remove it:  docker compose -f docker-compose.demo.yml down
+#
+# The demo lives in the ./demo folder next to this file. Delete that folder when you're done.
+services:
+  my-nab-demo:
+    build: .
+    container_name: my-nab-demo
+    ports:
+      - "8081:8000"
+    volumes:
+      - ./demo:/data

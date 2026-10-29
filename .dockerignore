@@ -1,0 +1,26 @@
+# Keep private data and dev clutter out of the image (the database is mounted
+# at /data at runtime, never baked in).
+data/
+demo-data/
+demo/
+*.db
+*.sqlite
+*.zip
+*.qfx
+*.ofx
+.venv/
+venv/
+.git/
+.claude/
+__pycache__/
+*.pyc
+Screenshots/
+2026-09-26-*/
+.env
+.DS_Store
+.github/
+packaging/
+desktop/
+tools/
+docker/
+docs/

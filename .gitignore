@@ -1,0 +1,40 @@
+# Never commit financial data (this app's whole point is private money).
+# The live database (registry + per-budget files):
+data/
+# Generated demo budgets (python3 tools/make_demo.py):
+demo-data/
+# App DBs, backups, demo/test DBs:
+*.db
+# ...except the ready-made demo budget that ships with the project:
+!demo/registry.db
+!demo/budgets/*.db
+# Extracted Actual Budget exports (db.sqlite):
+*.sqlite
+# Raw Actual Budget / bank export archives:
+*.zip
+# Bank download files:
+*.qfx
+*.ofx
+# (CSV left un-ignored: sample mapping fixtures may be worth committing;
+#  double-check any CSV isn't a real bank statement before adding it.)
+
+# Python / virtualenv
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Local tooling / editor
+.claude/
+.DS_Store
+
+# Generated deploy folder and its tarball (rebuild with: python3 tools/make_nab.py)
+docker/
+
+# Personal screenshots (may show real balances)
+Screenshots/
+
+# PyInstaller build output (the desktop programs are built by .github/workflows/build-desktop.yml)
+build/
+dist/

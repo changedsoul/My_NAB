@@ -1,0 +1,3 @@
+# Extra packages for the Docker / NAS version only (the desktop programs leave these out).
+# sqlcipher3: lets a budget be encrypted on disk (Settings, Security).
+sqlcipher3-binary>=0.5.4
